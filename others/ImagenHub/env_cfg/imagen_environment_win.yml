@@ -1,0 +1,71 @@
+# Windows 版：在 imagen_environment.yml 基础上去掉了 liger_kernel 和 xfuser
+# liger_kernel 依赖 triton，triton 没有 Windows 版本，会导致 pip 报 ResolutionImpossible
+# xfuser 是多卡并行推理库，面向 Linux，一并去掉以免再出安装问题
+# 这两个包在代码里只被 Step1X-Edit 用到（src/imagen_hub/pipelines/step1xedit），所以在 Windows 上 Step1X-Edit 不能用
+name: imagen
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - flask
+    - flask_restful
+    - flask_cors
+    - faiss-cpu
+    - fire
+    - h5py
+    - numpy>=1.24.0
+    - pandas<2.0.0
+    - peft
+    - torch
+    - torchvision
+    - torchaudio
+    - jupyterlab>=4.0.2
+    - notebook>=6.5.4
+    - albumentations>=1.1.0
+    - opencv-python>=4.2.0
+    - pudb~=2019.2
+    - imageio>=2.14.1
+    - imageio-ffmpeg>=0.4.7
+    - pytorch-lightning>=1.5.9
+    - omegaconf~=2.1.1
+    - gradio
+    - pillow~=9.5.0
+    - einops>=0.4.1
+    - torch-fidelity>=0.3.0
+    - setuptools>=59.5.0
+    - git+https://github.com/huggingface/diffusers.git@v0.35.0
+    - git+https://github.com/huggingface/transformers.git@v4.54.0
+    - torchmetrics>=0.6.0
+    - lpips
+    - dreamsim
+    - image-reward
+    - kornia>=0.6
+    - huggingface_hub>=0.17.0
+    - accelerate>=0.20.3
+    - safetensors
+    - datasets
+    - tqdm>=4.64.1
+    - matplotlib>=3.7.1
+    - taming-transformers-rom1504~=0.0.6
+    - madgrad>=1.1
+    - -e git+https://github.com/openai/CLIP.git@main#egg=clip
+    - dominate>=2.8.0
+    - openai
+    - nltk~=3.8.1
+    - krippendorff
+    - statsmodels
+    - sentencepiece
+    - protobuf
+    - pyinstrument
+    - attrdict
+    - timm
+    - black
+    - hydra-core
+    - pendulum
+    - loguru
+    - megfile
+    - qwen_vl_utils
